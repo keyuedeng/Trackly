@@ -20,7 +20,8 @@ export default function Hero() {
         <p className = 'text-lg sm:text-xl mt-4 sm:mt-6 w-full mx-auto '>
             Study Tracker is your personal companion for staying organized and focused.
         </p>
-        <div className='gap-4 '>
+        <div className='gap-4 grid grid-cols-2 w-fit '>
+            <Button text="Login" size="lg" />
             <Button text="Get started now  →" dark size="lg" />
         </div>
     </div>
