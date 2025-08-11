@@ -1,0 +1,7 @@
+@import "tailwindcss";
+
+.textGradient {
+  background: -webkit-linear-gradient(#202A44,#1c2f9b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
