@@ -1,5 +1,11 @@
 import { Inter } from 'next/font/google';
 import './globals.css';
+import { Baloo_2 } from "next/font/google";
+
+const baloo = Baloo_2({
+  subsets: ['latin'],
+  weight: ["600","700","800"],
+});
 
 const inter = Inter({subsets: ['latin']});
 
@@ -11,7 +17,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   const footer = (
     <footer className="p-4 sm:p-8">
-      <p className={'text-[#202A44]'}> Created with 💛</p>
+      <p className={'text-[#202A44] ' + baloo.className}> Created with 💛</p>
     </footer>
   )
   

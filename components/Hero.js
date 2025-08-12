@@ -21,8 +21,7 @@ export default function Hero() {
             Study Tracker is your personal companion for staying organized and focused.
         </p>
         <div className='gap-4 grid grid-cols-2 w-fit '>
-            <Button text="Login" size="lg" />
-            <Button text="Get started now  →" dark size="lg" />
+          <Button text={'Get started now\u2003❯'} dark /> 
         </div>
     </div>
   )

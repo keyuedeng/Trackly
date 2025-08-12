@@ -47,14 +47,13 @@ export default function Navbar() {
  }, []);
 
   return (
-    <div className="sticky top-0 z-50">
-    <nav className={`transition-all duration-200 ${
+    <nav className={`sticky top-0 z-50 transition-all duration-200 ${
         isScrolled
         ? 'bg-white/95 backdrop-blur-sm shadow-sm'
         : 'bg-white/90 backdrop-blur-sm '
     }`}>
         <div className="max-w-[1300px] mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex justify-between items-center h-16">
+            <div className="flex justify-between items-center h-22">
                 {/* brand */}
                 <Link href="/" className="flex items-center">
                     <h1 className={`text-xl font-bold text-[#202A44] ${baloo.className}`}>
@@ -76,7 +75,7 @@ export default function Navbar() {
                         Login
                     </Link>
                     <Link href="/register" className="bg-[#202A44] text-white px-4 py-2 rounded-full hover:bg-[#1a1f35] transition-colors">
-                        Register
+                        Register<span className="ml-2">❯</span>
                     </Link>
                 </div>
 
@@ -140,7 +139,5 @@ export default function Navbar() {
             )}
         </div>
     </nav>
-    <div className="relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] h-px bg-gray-200"></div>
-    </div>
   )
 }
