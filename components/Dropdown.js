@@ -5,7 +5,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import DropdownButton from './DropdownButton';
 import DropdownContent from './DropdownContent';
 
-export default function Dropdown({ buttonText, content }) {
+export default function Dropdown({ buttonText, content, onClose }) {
 
   const [isOpen, setIsOpen] = useState(false);
   
@@ -34,7 +34,7 @@ export default function Dropdown({ buttonText, content }) {
         <DropdownButton toggle={toggleDropdown} open={isOpen}>
           {buttonText}
         </DropdownButton>
-        <DropdownContent open={isOpen}>
+        <DropdownContent open={isOpen} setIsOpen={setIsOpen}>
           {content}
         </DropdownContent>
     </div>

@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function DropdownContent({ children, open }) {
+export default function DropdownContent({ children, open, setIsOpen }) {
   return (
     <div className={
       `absolute w-full flex flex-col items-center p-3 mt-1 bg-white rounded-md text-xs transform 
@@ -8,7 +8,15 @@ export default function DropdownContent({ children, open }) {
        transition-transform duration-150 ease-in-out transition-opacity duration-100 ease-in-out ` +
        (open ? 'opacity-100 translate-y-0 pointer-events-auto' : 'translate-y-[-5%] pointer-events-none')
       }>
-      {children}
+      {Array.isArray(children) 
+        ? children.map((child, index) => 
+            React.cloneElement(child, { 
+              key: child.key || index,
+              onClose: () => setIsOpen(false)
+            })
+          )
+        : React.cloneElement(children, { onClose: () => setIsOpen(false) })
+      }
     </div>
   )
 }
