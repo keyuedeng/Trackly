@@ -7,7 +7,8 @@ import Dropdown from '@/components/Dropdown';
 import DropdownItem from '@/components/DropdownItem';
 import { useState, useEffect } from 'react';
 import { useSessions } from '@/hooks/useSessions';
-
+import SessionsList from '@/components/SessionsList';
+import TimeChart from './components/TimeChart';
 
 
 export default function DashboardPage() {
@@ -52,7 +53,7 @@ export default function DashboardPage() {
                                 key={item}
                                 onClick={() => {
                                     setSelectedRange(item);
-                                    fetchSessions(selectedSubject, item); // when clicked, fetch sessions with new Range
+                                    fetchSessions(selectedSubject, item);
                                 }}
                             >
                                 {item}
@@ -75,25 +76,8 @@ export default function DashboardPage() {
                 />
                 </div>
 
-                {loading ? (
-                    <p>Loading...</p>
-                ) : (
-                    <div className="mt-8">
-                        <h3 className="text-lg font-semibold mb-4">
-                            Study Sessions ({sessions.length} results) 
-                        </h3>
-                        <div className="space-y-2">
-                            {sessions.map((session) => (
-                                <div key={session.id} className="p-3 bg-gray-50 rounded-lg">
-                                    <div className="font-medium">{session.subject}</div>
-                                    <div className="text-sm text-gray-600">
-                                        {session.duration} minutes • {new Date(session.start_time).toLocaleDateString()}
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                )}
+                <TimeChart selectedRange={selectedRange} sessions={sessions}/>
+                <SessionsList sessions={sessions} loading={loading} />
             </>
         )
     }

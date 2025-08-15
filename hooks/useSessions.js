@@ -3,15 +3,21 @@ import { useState, useEffect } from 'react';
 export function useSessions() {
     const [sessions, setSessions] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [selectedRange, setSelectedRange] = useState('All time');
+    const [selectedRange, setSelectedRange] = useState('This week');
     const [selectedSubject, setSelectedSubject] = useState('All subjects');
 
-    const fetchSessions = async (subjectFilter = selectedSubject, rangeFilter = selectedRange) => {
+    const fetchSessions = async (subjectFilter, rangeFilter) => {
+        
         try {
             setLoading(true);
             const params = new URLSearchParams();
-            if (subjectFilter && subjectFilter !== 'All subjects') params.set('subject', subjectFilter);
-            if (rangeFilter && rangeFilter !== 'All time') params.set('range', rangeFilter);
+            
+            // Use passed parameters or current state
+            const subject = subjectFilter || selectedSubject;
+            const range = rangeFilter || selectedRange;
+            
+            if (subject && subject !== 'All subjects') params.set('subject', subject);
+            if (range && range !== 'All time') params.set('range', range);
             
             const response = await fetch(`/api/sessions?${params.toString()}`);
             const result = await response.json();
