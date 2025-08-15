@@ -10,7 +10,9 @@ import { useSessions } from '@/hooks/useSessions';
 import SessionsList from '@/components/SessionsList';
 import TimeChart from './components/TimeChart';
 import Kpi from './components/Kpi';
-
+import SubjectPie from './components/SubjectPie';
+import StudyHeatmap from './components/StudyHeatmap';
+import RecentSessions from './components/RecentSessions';
 
 export default function DashboardPage() {
     const range = ['This week', 'This month', 'All time'];
@@ -26,6 +28,7 @@ export default function DashboardPage() {
     } = useSessions();
 
     const [subjects, setSubjects] = useState([]);
+    const [allSessions, setAllSessions] = useState([]);
 
     useEffect(() => {
         const loadSubjects = async () => {
@@ -33,7 +36,20 @@ export default function DashboardPage() {
             setSubjects(subjects);
         };
 
+        const loadAllSessions = async () => {
+            try {
+                const response = await fetch('/api/sessions');
+                const result = await response.json();
+                if (result.success) {
+                    setAllSessions(result.data);
+                }
+            } catch (error) {
+                console.error('Error fetching all sessions:', error);
+            }
+        };
+
         loadSubjects();
+        loadAllSessions();
     }, []); 
 
     const isAuthenticated = true; // Replace with actual authentication logic later
@@ -77,7 +93,23 @@ export default function DashboardPage() {
                 />
                 </div>
                 <Kpi selectedRange={selectedRange} sessions={sessions}/>
-                <TimeChart selectedRange={selectedRange} sessions={sessions}/>
+                <div className="flex flex-wrap gap-4">
+                    <div className="flex-[2] min-w-[300px]">
+                        <TimeChart selectedRange={selectedRange} sessions={sessions}/>
+                    </div>
+                    <div className="flex-1 min-w-[300px]">
+                        <SubjectPie sessions={sessions} selectedRange={selectedRange} />
+                    </div>
+                </div>
+                <div className="flex flex-wrap gap-4">
+                    <div className="flex-1 min-w-[400px]">
+                        <StudyHeatmap sessions={allSessions} selectedSubject={selectedSubject} />
+                    </div>
+                    <div className="flex-[1.2] min-w-[400px]">
+                        <RecentSessions sessions={sessions} />
+                    </div>
+                </div>
+                
                 <SessionsList sessions={sessions} loading={loading} />
             </>
         )

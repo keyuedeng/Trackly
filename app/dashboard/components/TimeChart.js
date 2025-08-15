@@ -122,12 +122,13 @@ export default function TimeChart({ selectedRange, sessions }) {
             <CardHeader>
                 <CardTitle>Hours Studied</CardTitle>
             </CardHeader>
-            <CardContent>
-                <ResponsiveContainer width="100%" height={300}>
+            <CardContent className="pl-1">
+                <ResponsiveContainer width="100%" height={216}>
                     <ComposedChart data={data}>
                         <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
                         <XAxis 
                             dataKey="day" 
+                            tickLine={false}
                             tickFormatter={(value) => {
                                 if (selectedRange === 'This week') {
                                     try {
@@ -146,9 +147,20 @@ export default function TimeChart({ selectedRange, sessions }) {
                         />
                         <YAxis 
                             ticks={yAxisTicks}
+                            tickLine={false}
                             tickFormatter={(value) => value}
+                            textAnchor="middle"
                         />
-                        <Tooltip formatter={(value) => [`${value.toFixed(1)} hours`, 'Study Time']} />
+                        <Tooltip 
+                            formatter={(value) => [`${value.toFixed(1)} hours`, 'Study Time']}
+                            wrapperStyle={{ 
+                                maxHeight: '60px', 
+                                overflow: 'hidden',
+                                fontSize: '12px',
+                                borderBottom: '1px solid #ccc',
+                                width: 'fit-content'
+                            }}
+                        />
                         <defs>
                             <linearGradient id="colorHours" x1="0" y1="0" x2="0" y2="1">
                                 <stop offset="5%" stopColor="#f9a8d4" stopOpacity={0.4}/>
