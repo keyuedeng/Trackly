@@ -11,8 +11,9 @@ import {
   } from "@/components/Card"
 
 import {
-    LineChart,
+    ComposedChart,
     Line, 
+    Area,
     XAxis,
     YAxis,
     CartesianGrid,
@@ -119,11 +120,11 @@ export default function TimeChart({ selectedRange, sessions }) {
     return (
         <Card className="mt-8">
             <CardHeader>
-                <CardTitle>Study Time (Hours)</CardTitle>
+                <CardTitle>Hours Studied</CardTitle>
             </CardHeader>
             <CardContent>
                 <ResponsiveContainer width="100%" height={300}>
-                    <LineChart data={data}>
+                    <ComposedChart data={data}>
                         <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
                         <XAxis 
                             dataKey="day" 
@@ -148,8 +149,15 @@ export default function TimeChart({ selectedRange, sessions }) {
                             tickFormatter={(value) => value}
                         />
                         <Tooltip formatter={(value) => [`${value.toFixed(1)} hours`, 'Study Time']} />
-                        <Line type="monotone" dataKey="hours" stroke="#4f46e5" strokeWidth={2} dot={false} />
-                    </LineChart>
+                        <defs>
+                            <linearGradient id="colorHours" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="5%" stopColor="#f9a8d4" stopOpacity={0.4}/>
+                                <stop offset="95%" stopColor="#f9a8d4" stopOpacity={0.05}/>
+                            </linearGradient>
+                        </defs>
+                        <Area type="monotone" dataKey="hours" fill="url(#colorHours)" />
+                        <Line type="monotone" dataKey="hours" stroke="#f9a8d4" strokeWidth={4} dot={false} />
+                    </ComposedChart>
                 </ResponsiveContainer>
             </CardContent>
         </Card>
