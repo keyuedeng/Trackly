@@ -9,6 +9,7 @@ import { useState, useEffect } from 'react';
 import { useSessions } from '@/hooks/useSessions';
 import SessionsList from '@/components/SessionsList';
 import TimeChart from './components/TimeChart';
+import Kpi from './components/Kpi';
 
 
 export default function DashboardPage() {
@@ -75,7 +76,7 @@ export default function DashboardPage() {
                         ))}
                 />
                 </div>
-
+                <Kpi selectedRange={selectedRange} sessions={sessions}/>
                 <TimeChart selectedRange={selectedRange} sessions={sessions}/>
                 <SessionsList sessions={sessions} loading={loading} />
             </>
