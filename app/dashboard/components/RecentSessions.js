@@ -1,5 +1,6 @@
 "use client"
 
+import { formatDuration } from '@/utils/utils';
 import {
     Table,
     TableBody,
@@ -14,6 +15,7 @@ import {
     CardContent,
     CardHeader,
     CardTitle,
+    CardFooter,
   } from "@/components/Card"
 
 
@@ -22,7 +24,7 @@ export default function RecentSessions({ sessions }) {
 
     const data = sessions.slice(0, 5).map(session => ({
         subject: session.subject,
-        duration: `${(session.duration / 60).toFixed(1)}h`,
+        duration: formatDuration(session.duration),
         date: new Date(session.start_time).toLocaleDateString()
     }));
 
@@ -51,6 +53,14 @@ export default function RecentSessions({ sessions }) {
             </TableBody>
         </Table>
             </CardContent>
+            <CardFooter className="flex justify-center pt-4 border-t">
+                <a 
+                    href="/studysessions" 
+                    className="text-blue-600 hover:text-blue-800 text-sm font-medium transition-colors"
+                >
+                    See All Sessions →
+                </a>
+            </CardFooter>
         </Card>
     )
 }

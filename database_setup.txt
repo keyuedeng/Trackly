@@ -1,0 +1,71 @@
+CREATE TABLE IF NOT EXISTS sessions (
+    id SERIAL PRIMARY KEY,
+    subject VARCHAR(100) NOT NULL, 
+    duration INTEGER NOT NULL, 
+    start_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    notes TEXT
+);
+
+INSERT INTO sessions (subject, duration, start_time, notes) VALUES
+('Calculus', 120, '2025-08-15 10:00:00', 'Reviewing integration by parts'),
+('Physics', 90, '2025-08-15 11:30:00', 'Working on projectile motion'),
+('English', 60, '2025-08-14 13:00:00', 'Preparing for essay'),
+('History', 120, '2025-08-13 15:00:00', 'Studying the American Revolution'),
+('Chemistry', 90, '2025-08-12 16:30:00', 'Reviewing stoichiometry'),
+('Biology', 60, '2025-08-12 18:00:00', 'Preparing for lab report'),
+('Spanish', 120, '2025-08-11 20:00:00', 'Reviewing Spanish grammar'),
+('Art', 90, '2025-08-11 21:30:00', 'Working on watercolor painting'),
+('Music', 60, '2025-08-10 23:00:00', 'Practicing piano'),
+('Computer Science', 120, '2025-08-10 01:00:00', 'Working on a project'),
+('Calculus', 120, '2025-08-08 01:00:00', 'Learning Integration'),
+('Calculus', 150, '2025-08-01 01:00:00', 'Learning Integration'),
+('Calculus', 60, '2025-08-01 01:00:00', 'Learning Integration'),
+('Calculus', 90, '2025-07-29 01:00:00', 'Learning Integration'),
+('Calculus', 60, '2025-07-05 01:00:00', 'Learning Integration'),
+('Calculus', 60, '2025-07-04 01:00:00', 'Learning Integration');
+
+CREATE TABLE IF NOT EXISTS quotes (
+    id SERIAL PRIMARY KEY,
+    text TEXT NOT NULL,
+    author VARCHAR(255)
+);
+
+INSERT INTO quotes (text, author) VALUES
+('The best way to predict the future is to invent it.', 'Alan Kay'),
+('The future depends on what you do today.', 'Mahatma Gandhi'),
+('It always seems impossible until it is done.', 'Nelson Mandela'),
+('The secret of getting ahead is getting started.', 'Mark Twain'),
+('Success is the sum of small efforts, repeated day in and day out.', 'Robert Collier'),
+('Study while others are sleeping; work while others are loafing; prepare while others are playing; and dream while others are wishing.', 'William A. Ward'),
+('One day, the pain of discipline will be less than the pain of regret.', 'Jim Rohn'),
+('Discipline is choosing between what you want now and what you want most.', 'Abraham Lincoln'),
+('Work hard in silence, let your success make the noise.', 'Frank Ocean'),
+('The man who moves a mountain begins by carrying away small stones.', 'Confucius'),
+('You had time to scroll. You have time to study.', 'Unknown'),
+('Hard work beats talent when talent doesn''t work hard.', 'Tim Notke'),
+('Dreams don''t work unless you do.', 'John C. Maxwell'),
+('Study like you have an exam tomorrow. Because... you probably do.', 'Unknown'),
+('You are more capable than you think.', 'Unknown'),
+('Work hard, play hard.', 'James DeKoven'),
+('The way to get started is to quit talking and begin doing.', 'Walt Disney'),
+('Dont''t count the days, make the days count.', 'Muhammad Ali'),
+('You don''t have to see the whole staircase, just take the first step.', 'Martin Luther King, Jr.'),
+('Everything negative - pressure, challenges - is all an opportunity for me to rise.', 'Kobe Bryant'),
+('Nothing is given, everything is earned.', 'LeBron James'),
+('You can''t have a million dollar dream with a minimum wage work ethic.', 'Stephan C. Hogan'),
+('Live as if you were to die tomorrow. Learn as if you were to live forever.', 'Mahatma Gandhi'),
+('An investment in knowledge pays the best interest.', 'Benjamin Franklin'),
+('The mind is not a vessel to fill, but a fire to kindle.', 'Plutarch'),
+('The only way to learn mathematics is to do mathematics.', 'Paul Halmos'),
+('Strive for progress, not perfection.', 'Unknown'),
+('The capacity to learn is a gift; the ability to learn is a skill; the willingness to learn is a choice.', 'Brian Tracy'),
+('The difference between ordinary and extraordinary is that little extra.', 'Jimmy Johnson'),
+('Procrastination is the thief of time.', 'Edward Young'),
+('Reading is to the mind what exercise is to the body.', 'Joseph Addison'),
+('The more you read, the more things you will know. The more you learn, the more places you''ll go.', 'Dr. Seuss'),
+('Great things are not done by impulse, but by a series of small things brought together.', 'Vincent van Gogh'),
+('We do today what they won''t, so we can do tomorrow what they can''t.', 'Dwayne "The Rock" Johnson'),
+('Don''t practice until you get it right; practice until you can''t get it wrong.', 'Pele'),
+('The price of discipline is less than the pain of regret.', 'Nido Qubein'),
+('There are no shortcuts to any place worth going.', 'Beverly Sills'),
+('The only time you should look back is to see how far you have come.', 'Unknown');

@@ -36,9 +36,18 @@ export default function StudyHeatmap({ sessions, selectedSubject }) {
             days.push({ date: null, hours: 0, isEmpty: true });
         }
         
+        // Get today's date for highlighting
+        const today = new Date();
+        const todayYear = today.getFullYear();
+        const todayMonth = today.getMonth();
+        const todayDay = today.getDate();
+        
         // Add all days of the month
         for (let day = 1; day <= daysInMonth; day++) {
             const date = new Date(year, month, day);
+            
+            // Check if this is today
+            const isToday = year === todayYear && month === todayMonth && day === todayDay;
             
             // Calculate total hours for this day
             const daySessions = validSessions.filter(session => {
@@ -77,7 +86,8 @@ export default function StudyHeatmap({ sessions, selectedSubject }) {
             days.push({
                 date,
                 hours: totalHours,
-                isEmpty: false
+                isEmpty: false,
+                isToday
             });
         }
         
@@ -164,6 +174,7 @@ export default function StudyHeatmap({ sessions, selectedSubject }) {
                                     aspect-square rounded-sm border border-gray-200
                                     ${day.isEmpty ? 'bg-transparent' : getColorIntensity(day.hours)}
                                     ${!day.isEmpty ? 'hover:ring-2 hover:ring-green-300 cursor-pointer transition-all' : ''}
+                                    ${day.isToday ? 'ring-2 ring-blue-500 shadow-md' : ''}
                                     relative group
                                 `}
                                 style={!day.isEmpty && day.hours > 0 ? {

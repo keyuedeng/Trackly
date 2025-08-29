@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 
-export function useSessions() {
+export function useSessions(defaultRange = 'This week') {
     const [sessions, setSessions] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [selectedRange, setSelectedRange] = useState('This week');
+    const [selectedRange, setSelectedRange] = useState(defaultRange);
     const [selectedSubject, setSelectedSubject] = useState('All subjects');
+    const [subjects, setSubjects] = useState(['All subjects']);
 
     const fetchSessions = async (subjectFilter, rangeFilter) => {
         
@@ -38,7 +39,9 @@ export function useSessions() {
             const result = await response.json();
             
             if (result.success) {
-                return ['All subjects', ...result.data];
+                const subjectsData = ['All subjects', ...result.data];
+                setSubjects(subjectsData);
+                return subjectsData;
             }
         } catch (error) {
             console.error('Error fetching subjects:', error);
@@ -48,6 +51,7 @@ export function useSessions() {
 
     useEffect(() => {
         fetchSessions();
+        fetchSubjects();
     }, []);
 
     return {
@@ -58,6 +62,7 @@ export function useSessions() {
         setSelectedRange,
         setSelectedSubject,
         fetchSessions,
-        fetchSubjects
+        fetchSubjects,
+        subjects
     };
 }

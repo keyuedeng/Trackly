@@ -13,6 +13,7 @@ import Kpi from './components/Kpi';
 import SubjectPie from './components/SubjectPie';
 import StudyHeatmap from './components/StudyHeatmap';
 import RecentSessions from './components/RecentSessions';
+import QuoteOfTheDay from './components/QuoteOfTheDay';
 
 export default function DashboardPage() {
     const range = ['This week', 'This month', 'All time'];
@@ -107,10 +108,9 @@ export default function DashboardPage() {
                     </div>
                     <div className="flex-[1.2] min-w-[400px]">
                         <RecentSessions sessions={sessions} />
+                        <QuoteOfTheDay />
                     </div>
                 </div>
-                
-                <SessionsList sessions={sessions} loading={loading} />
             </>
         )
     }
