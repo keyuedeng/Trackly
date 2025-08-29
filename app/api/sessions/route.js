@@ -73,3 +73,28 @@ export async function GET(request) {
         }, {status: 500});
     }
 }
+
+export async function POST(request) {
+    try {
+      const { subject, duration, startTime, notes } = await request.json();
+  
+      if (!subject || typeof duration !== 'number' || !startTime) {
+        return Response.json({ success: false, error: 'Missing required fields' }, { status: 400 });
+      }
+      
+      // duration is seconds from client
+    const durationMinutes = Math.max(0, Math.round(duration / 60)); // or Math.floor(...)
+
+    const query = `
+    INSERT INTO sessions (subject, duration, start_time, notes)
+    VALUES ($1, $2, $3, $4)
+    RETURNING *`;
+    const params = [subject, durationMinutes, startTime, notes || null];
+  
+      const result = await pool.query(query, params);
+      return Response.json({ success: true, data: result.rows[0] }, { status: 201 });
+    } catch (error) {
+      console.error('Database error:', error);
+      return Response.json({ success: false, error: 'Failed to create session' }, { status: 500 });
+    }
+  }

@@ -84,19 +84,20 @@ export default function AddSession() {
     function handleStop() {
         const actualSeconds = Math.floor((accumulatedRunMs + (Date.now() - startedAt)) / 1000);
         console.log('Session stopped. Actual time:', actualSeconds, 'seconds');
-        // You can call handleEndSession here with actualSeconds
+        handleEndSession(actualSeconds);
         handleReset();
     }
-    async function handleEndSession() {
-        const response = await fetch('/api/session', {
+    async function handleEndSession(actualSeconds) {
+        const response = await fetch('/api/sessions', {
             method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                subject,
-                duration: selectedDuration,
-                endTime,
-                notes,
+              subject,
+              duration: actualSeconds,            // integer seconds
+              startTime: new Date(startedAt).toISOString(), // will map to start_time
+              notes,
             }),
-        })
+          });
 
         if (response.ok) {
             console.log('session ended');
@@ -120,6 +121,8 @@ export default function AddSession() {
 
             if (remaining <= 0) {
                 // handleEndSession will be called here later
+                const actualSeconds = Math.floor((accumulatedRunMs + (Date.now() - startedAt)) / 1000);
+                handleEndSession(actualSeconds);
                 handleReset();
             }
         }, 1000);
